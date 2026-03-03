@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
           <div class="intro-image">
-            <img src="/assets/profile.jpg" alt="Juan José Medicis" class="profile-img">
+            <img src="assets/profile.jpg" alt="Juan José Medicis" class="profile-img">
           </div>
         </div>
 
