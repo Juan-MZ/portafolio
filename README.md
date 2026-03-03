@@ -1,6 +1,108 @@
-# Portafolio
+# Portafolio - Juan José Medicis
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.0.
+Portafolio personal moderno y responsivo construido con Angular 21, con secciones de presentación, experiencia profesional, habilidades, proyectos y contacto.
+
+## 🚀 Características
+
+- **Diseño Moderno**: Interfaz oscura con gradientes, animaciones suaves y CSS custom properties
+- **Totalmente Responsivo**: Optimizado para desktop, tablet y móvil
+- **Componentes Standalone**: Arquitectura Angular moderna con componentes independientes y signals
+- **Animación de Typewriter**: Efecto de escritura en el título del hero
+- **Navegación Fluida**: Scroll suave con anchor links y `scroll-margin-top` calibrado
+- **Formulario de Contacto Real**: Envío de emails via Web3Forms (sin backend propio)
+- **Página de Experiencia**: Timeline de experiencia laboral, educación y certificaciones
+- **Página de Proyectos**: Grid filtrable con enlace al perfil de GitHub
+
+## 🛠️ Tecnologías
+
+- Angular 21.2.0
+- TypeScript
+- CSS3 con animaciones y variables personalizadas
+- Angular Signals
+- Angular Router (standalone, withInMemoryScrolling)
+- HttpClient + Web3Forms API
+- Devicons (iconos de tecnologías)
+
+## 📦 Instalación
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/Juan-MZ/Portafolio.git
+cd Portafolio
+```
+
+2. Instala las dependencias:
+```bash
+npm install
+```
+
+3. Inicia el servidor de desarrollo:
+```bash
+npm start
+```
+
+4. Abre tu navegador en `http://localhost:4200/`
+
+> **Nota:** Para que el formulario de contacto envíe emails reales, reemplaza `TU_ACCESS_KEY_DE_WEB3FORMS` en `contact.component.ts` con tu clave de [web3forms.com](https://web3forms.com).
+
+## 🏗️ Estructura del Proyecto
+
+```
+src/
+├── app/
+│   ├── data/
+│   │   └── projects.data.ts            # Datos de proyectos
+│   ├── pages/
+│   │   ├── home/
+│   │   │   └── home.component.ts       # Página principal (ruta /)
+│   │   ├── projects/
+│   │   │   └── projects-page.component.ts  # Todos los proyectos (ruta /projects)
+│   │   └── experience/
+│   │       └── experience-page.component.ts # Experiencia completa (ruta /experience)
+│   ├── widgets/
+│   │   ├── hero.component.ts           # Sección Sobre mí + foto + typewriter
+│   │   ├── experience-preview.component.ts # Preview de experiencia en home
+│   │   ├── skills.component.ts         # Habilidades en tarjetas por categoría
+│   │   ├── projects.component.ts       # Proyectos destacados en home
+│   │   ├── contact.component.ts        # Formulario de contacto (Web3Forms)
+│   │   └── navbar.component.ts         # Barra de navegación fija
+│   ├── app.config.ts                   # Configuración (router, httpClient)
+│   ├── app.html                        # Template raíz
+│   └── app.routes.ts                   # Rutas: /, /projects, /experience
+├── styles.css                          # Estilos globales y variables CSS
+└── index.html                          # HTML principal
+```
+
+## 🗺️ Rutas
+
+| Ruta | Descripción |
+|------|-------------|
+| `/` | Página principal con todas las secciones |
+| `/projects` | Página completa de proyectos con filtros |
+| `/experience` | Timeline de experiencia laboral, educación y certificaciones |
+
+## 🎨 Secciones (Home)
+
+### Sobre mí (`#sobre-mi`)
+- Presentación personal con foto de perfil
+- Animación typewriter en el cargo
+- Links a LinkedIn, GitHub y correo
+
+### Experiencia (`#experiencia`)
+- Preview de experiencia laboral y educación reciente
+- Botón para ver la página completa `/experience`
+
+### Habilidades (`#habilidades`)
+- 4 categorías: Frontend, Backend, Herramientas, Aprendiendo
+- Items clicables con icono y enlace al sitio oficial de cada tecnología
+
+### Proyectos
+- Vista previa de proyectos destacados
+- Enlace a la página `/projects` con todos los proyectos y filtros
+
+### Contacto (`#contacto`)
+- Formulario funcional con estados: enviando / éxito / error
+- Tarjetas con email, teléfono y ubicación
 
 ## Development server
 
@@ -11,49 +113,3 @@ ng serve
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
