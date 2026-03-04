@@ -38,18 +38,18 @@ import { CommonModule } from '@angular/common';
                 </svg>
                 juanjosemedicis&#64;gmail.com
               </a>
-              <a href="assets/CV_Juan_Medicis_2026.pdf" download="CV_Juan_Medicis_2026.pdf" aria-label="Descargar CV" class="cv-download">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                  <polyline points="7 10 12 15 17 10"/>
-                  <line x1="12" y1="15" x2="12" y2="3"/>
-                </svg>
-                Descargar CV
-              </a>
             </div>
           </div>
           <div class="intro-image">
             <img src="assets/profile.jpg" alt="Juan José Medicis" class="profile-img">
+            <a href="assets/CV_Juan_Medicis_2026.pdf" download="CV_Juan_Medicis_2026.pdf" aria-label="Descargar CV" class="cv-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Descargar CV
+            </a>
           </div>
         </div>
 
@@ -207,21 +207,34 @@ import { CommonModule } from '@angular/common';
       background: rgba(96, 165, 250, 0.05);
     }
 
-    .social-links a.cv-download {
-      border-color: #49c5ff;
-      color: #49c5ff;
-      font-weight: 600;
-    }
 
-    .social-links a.cv-download:hover {
-      background: rgba(73, 197, 255, 0.12);
-      border-color: #49c5ff;
-      color: #49c5ff;
-      box-shadow: 0 0 12px rgba(73, 197, 255, 0.25);
-    }
 
     .intro-image {
       flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .cv-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(96, 165, 250, 0.05);
     }
 
     .profile-img {
