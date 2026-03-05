@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/app.css"],
+  "sourcesContent": ["/* App Component Styles */\r\n\r\n:host {\r\n  display: block;\r\n}"],
+  "mappings": ";AAEA;AACE,WAAS;AACX;",
+  "names": []
+}
