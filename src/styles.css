@@ -6,6 +6,9 @@
   box-sizing: border-box;
 }
 
+/* ======================================================
+   DARK THEME — default (tema oscuro, predeterminado)
+   ====================================================== */
 :root {
   --primary: #60a5fa;
   --primary-dark: #3b82f6;
@@ -20,6 +23,88 @@
   --bg-card-hover: #334155;
   --border-color: #334155;
   --shadow: rgba(0, 0, 0, 0.3);
+
+  /* Body background */
+  --body-bg: #020617;
+  --body-gradient: radial-gradient(80% 80% at 50% -20%, rgba(0, 153, 255, 0.25), transparent);
+
+  /* Navbar */
+  --navbar-bg: rgba(15, 23, 42, 0.9);
+  --navbar-bg-scrolled: rgba(15, 23, 42, 0.97);
+
+  /* Skills glassmorphism */
+  --glass-card-border: rgba(255, 255, 255, 0.08);
+  --glass-card-bg-from: rgba(255, 255, 255, 0.05);
+  --glass-card-bg-to: rgba(0, 0, 0, 0.3);
+  --skill-item-bg: rgba(255, 255, 255, 0.05);
+  --skill-item-border: rgba(255, 255, 255, 0.1);
+  --skill-item-hover-bg: rgba(255, 255, 255, 0.11);
+  --skill-item-hover-border: rgba(255, 255, 255, 0.25);
+
+  /* Subtle surface (timeline cards, pills) */
+  --surface-subtle-bg: rgba(255, 255, 255, 0.03);
+  --surface-subtle-hover: rgba(255, 255, 255, 0.05);
+  --surface-subtle-border: rgba(255, 255, 255, 0.08);
+  --surface-subtle-hover-border: rgba(255, 255, 255, 0.14);
+  --surface-line: rgba(255, 255, 255, 0.07);
+  --pill-bg: rgba(255, 255, 255, 0.06);
+  --pill-border: rgba(255, 255, 255, 0.1);
+
+  /* Hero typed text */
+  --typed-gradient: linear-gradient(135deg, #49c5ff 0%, #c6d7ff 30%, #ffffff 100%);
+  --typed-cursor: #49c5ff;
+  --name-color: #49c5ff;
+}
+
+/* ======================================================
+   LIGHT THEME — tema claro
+   Fondo perla-azul, tipografía slate, acentos índigo/azul
+   ====================================================== */
+[data-theme="light"] {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-light: #60a5fa;
+  --accent: #6366f1;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --bg-dark: #eef2fb;
+  --bg-darker: #e2e9f7;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f5ff;
+  --border-color: #c7d2e8;
+  --shadow: rgba(15, 23, 42, 0.1);
+
+  /* Body background */
+  --body-bg: #f0f4ff;
+  --body-gradient: radial-gradient(80% 80% at 50% -20%, rgba(59, 130, 246, 0.14), transparent);
+
+  /* Navbar */
+  --navbar-bg: rgba(240, 244, 255, 0.88);
+  --navbar-bg-scrolled: rgba(240, 244, 255, 0.97);
+
+  /* Skills glassmorphism */
+  --glass-card-border: rgba(15, 23, 42, 0.09);
+  --glass-card-bg-from: rgba(255, 255, 255, 0.92);
+  --glass-card-bg-to: rgba(226, 233, 247, 0.6);
+  --skill-item-bg: rgba(255, 255, 255, 0.75);
+  --skill-item-border: rgba(15, 23, 42, 0.1);
+  --skill-item-hover-bg: rgba(255, 255, 255, 1);
+  --skill-item-hover-border: rgba(37, 99, 235, 0.3);
+
+  /* Subtle surface (timeline cards, pills) */
+  --surface-subtle-bg: rgba(255, 255, 255, 0.85);
+  --surface-subtle-hover: rgba(255, 255, 255, 0.95);
+  --surface-subtle-border: rgba(15, 23, 42, 0.09);
+  --surface-subtle-hover-border: rgba(15, 23, 42, 0.16);
+  --surface-line: rgba(15, 23, 42, 0.1);
+  --pill-bg: rgba(15, 23, 42, 0.05);
+  --pill-border: rgba(15, 23, 42, 0.12);
+
+  /* Hero typed text */
+  --typed-gradient: linear-gradient(135deg, #2563eb 0%, #6366f1 50%, #1e3a8a 100%);
+  --typed-cursor: #2563eb;
+  --name-color: #2563eb;
 }
 
 html {
@@ -32,10 +117,10 @@ body {
   line-height: 1.6;
   color: var(--text-primary);
   overflow-x: hidden;
-  background-image: radial-gradient(80% 80% at 50% -20%, #0099ff40, #fff0);
-  --tw-bg-opacity: 1;
-  background-color: rgb(2 6 23/var(--tw-bg-opacity));
+  background-image: var(--body-gradient);
+  background-color: var(--body-bg);
   background-attachment: fixed;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 

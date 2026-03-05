@@ -278,7 +278,7 @@ const CERT_ITEMS: ExperienceItem[] = [
     /* Header */
     .page-header {
       padding: 3rem 0 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid var(--surface-subtle-border);
       margin-bottom: 4rem;
     }
 
@@ -360,7 +360,7 @@ const CERT_ITEMS: ExperienceItem[] = [
       top: 0;
       bottom: 0;
       width: 1px;
-      background: rgba(255,255,255,0.08);
+      background: var(--surface-line);
     }
 
     .timeline-item {
@@ -384,16 +384,16 @@ const CERT_ITEMS: ExperienceItem[] = [
     .edu-dot  { background: #a78bfa; border-color: #a78bfa; box-shadow: 0 0 8px rgba(167,139,250,0.5); }
 
     .timeline-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-subtle-bg);
+      border: 1px solid var(--surface-subtle-border);
       border-radius: 14px;
       padding: 1.5rem;
       transition: border-color 0.2s, background 0.2s;
     }
 
     .timeline-card:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.15);
+      background: var(--surface-subtle-hover);
+      border-color: var(--surface-subtle-hover-border);
     }
 
     .card-header {
@@ -428,8 +428,8 @@ const CERT_ITEMS: ExperienceItem[] = [
     .period-badge {
       font-size: 0.78rem;
       color: var(--text-secondary);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
       padding: 0.25rem 0.75rem;
       border-radius: 999px;
       white-space: nowrap;
@@ -472,15 +472,15 @@ const CERT_ITEMS: ExperienceItem[] = [
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-subtle-bg);
+      border: 1px solid var(--surface-subtle-border);
       border-radius: 12px;
       padding: 1rem 1.25rem;
       transition: all 0.2s ease;
     }
 
     .cert-card:hover {
-      background: rgba(255,255,255,0.05);
+      background: var(--surface-subtle-hover);
       border-color: rgba(251,191,36,0.25);
     }
 
@@ -516,8 +516,8 @@ const CERT_ITEMS: ExperienceItem[] = [
     .cert-period {
       font-size: 0.75rem;
       color: var(--text-secondary);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
       padding: 0.2rem 0.65rem;
       border-radius: 999px;
       white-space: nowrap;

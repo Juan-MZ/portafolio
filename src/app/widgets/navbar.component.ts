@@ -2,6 +2,7 @@ import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LangService } from '../services/lang.service';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -40,6 +41,27 @@ import { LangService } from '../services/lang.service';
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
             </svg>
           </a>
+          <button class="theme-btn" (click)="themeService.toggle()"
+            [attr.aria-label]="themeService.theme() === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'">
+            <!-- Sun icon: visible in dark mode -->
+            <svg *ngIf="themeService.theme() === 'dark'" width="18" height="18" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <line x1="12" y1="2" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+              <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+              <line x1="2" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="22" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+              <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon icon: visible in light mode -->
+            <svg *ngIf="themeService.theme() === 'light'" width="18" height="18" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
           <button class="lang-btn" (click)="langService.toggle()" [attr.aria-label]="lang() === 'es' ? 'Switch to English' : 'Cambiar a español'">
             {{ lang() === 'es' ? 'EN' : 'ES' }}
           </button>
@@ -54,16 +76,16 @@ import { LangService } from '../services/lang.service';
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(15, 23, 42, 0.9);
+      background: var(--navbar-bg);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
       border-bottom: 1px solid rgba(51, 65, 85, 0.5);
     }
 
     .navbar.scrolled {
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 2px 20px var(--shadow);
       border-bottom-color: var(--border-color);
-      background: rgba(15, 23, 42, 0.95);
+      background: var(--navbar-bg-scrolled);
     }
 
     .nav-container {
@@ -177,6 +199,27 @@ import { LangService } from '../services/lang.service';
       background: var(--bg-card);
     }
 
+    .theme-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      border-radius: 8px;
+      background: none;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .theme-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--bg-card);
+    }
+
     .mobile-toggle {
       display: none;
       flex-direction: column;
@@ -238,6 +281,7 @@ import { LangService } from '../services/lang.service';
 })
 export class NavbarComponent {
   readonly langService = inject(LangService);
+  readonly themeService = inject(ThemeService);
   readonly lang = this.langService.lang;
   readonly t = this.langService.t;
   isScrolled = signal(false);

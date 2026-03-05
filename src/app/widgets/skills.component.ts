@@ -102,8 +102,8 @@ const ALL_SKILLS: Skill[] = [
     .category-card {
       border-radius: 16px;
       padding: 2rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(to bottom right, rgba(255,255,255,0.05), rgba(0,0,0,0.3));
+      border: 1px solid var(--glass-card-border);
+      background: linear-gradient(to bottom right, var(--glass-card-bg-from), var(--glass-card-bg-to));
     }
 
     .category-title {
@@ -152,16 +152,16 @@ const ALL_SKILLS: Skill[] = [
       gap: 0.6rem;
       padding: 1rem 0.5rem;
       border-radius: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--skill-item-bg);
+      border: 1px solid var(--skill-item-border);
       transition: all 0.2s ease;
       cursor: pointer;
       text-decoration: none;
     }
 
     .skill-item:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.25);
+      background: var(--skill-item-hover-bg);
+      border-color: var(--skill-item-hover-border);
       transform: translateY(-2px);
     }
 

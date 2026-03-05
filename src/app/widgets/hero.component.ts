@@ -140,7 +140,7 @@ import { LangService } from '../services/lang.service';
     .name {
       font-size: 1.5rem;
       font-weight: 600;
-      color: #49c5ff;
+      color: var(--name-color);
       margin: 0 0 0.5rem 0;
       line-height: 1.1;
     }
@@ -152,14 +152,14 @@ import { LangService } from '../services/lang.service';
     }
 
     .typed-text {
-      background: linear-gradient(135deg, #49c5ff 0%, #c6d7ff 30%, #ffffff 100%);
+      background: var(--typed-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .cursor {
       display: inline-block;
-      color: #49c5ff;
+      color: var(--typed-cursor);
       font-weight: 300;
       margin-left: 2px;
     }
@@ -203,7 +203,7 @@ import { LangService } from '../services/lang.service';
     .social-links a:hover {
       border-color: var(--primary);
       color: var(--primary);
-      background: rgba(96, 165, 250, 0.05);
+      background: var(--bg-card);
     }
 
 
@@ -233,7 +233,7 @@ import { LangService } from '../services/lang.service';
     .cv-btn:hover {
       border-color: var(--primary);
       color: var(--primary);
-      background: rgba(96, 165, 250, 0.05);
+      background: var(--bg-card);
     }
 
     .profile-img {

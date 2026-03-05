@@ -203,7 +203,7 @@ import { LangService } from '../services/lang.service';
       top: 0;
       bottom: 0;
       width: 1px;
-      background: rgba(255,255,255,0.07);
+      background: var(--surface-line);
     }
 
     .timeline-track { position: relative; }
@@ -221,16 +221,16 @@ import { LangService } from '../services/lang.service';
     .edu-dot  { background: #a78bfa; box-shadow: 0 0 8px rgba(167,139,250,0.4); }
 
     .timeline-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--surface-subtle-bg);
+      border: 1px solid var(--surface-subtle-border);
       border-radius: 14px;
       padding: 1.25rem 1.5rem;
       transition: all 0.2s ease;
     }
 
     .timeline-card:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(255,255,255,0.14);
+      background: var(--surface-subtle-hover);
+      border-color: var(--surface-subtle-hover-border);
     }
 
     .card-top {
@@ -258,8 +258,8 @@ import { LangService } from '../services/lang.service';
     .period-pill {
       font-size: 0.75rem;
       color: var(--text-secondary);
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
       white-space: nowrap;
