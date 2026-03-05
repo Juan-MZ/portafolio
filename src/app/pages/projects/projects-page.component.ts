@@ -1,6 +1,7 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PROJECTS, ProjectCategory } from '../../data/projects.data';
+import { LangService } from '../../services/lang.service';
 
 type FilterOption = 'Todos' | ProjectCategory;
 
@@ -17,12 +18,10 @@ type FilterOption = 'Todos' | ProjectCategory;
               stroke="currentColor" stroke-width="2">
               <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
-            Inicio
+            {{ t().projectsPage.backLink }}
           </a>
-          <h1 class="page-title">Proyectos</h1>
-          <p class="page-subtitle">
-            Una selección de los proyectos en los que he trabajado
-          </p>
+          <h1 class="page-title">{{ t().projectsPage.title }}</h1>
+          <p class="page-subtitle">{{ t().projectsPage.subtitle }}</p>
           <div class="notice-box">
             <svg class="notice-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -30,17 +29,14 @@ type FilterOption = 'Todos' | ProjectCategory;
               <line x1="12" y1="8" x2="12" y2="12"/>
               <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
-            <p class="notice-text">
-              La mayoría de mis proyectos más importantes son privados, ya que han sido desarrollados
-              para clientes. Estos son algunos de mis proyectos públicos.
-            </p>
+            <p class="notice-text">{{ t().projectsPage.notice }}</p>
           </div>
           <a href="https://github.com/Juan-MZ?tab=repositories" target="_blank"
             rel="noopener noreferrer" class="github-cta-btn">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
-            Ver todos mis repositorios en GitHub
+            {{ t().projectsPage.githubCta }}
           </a>
         </div>
       </div>
@@ -52,7 +48,7 @@ type FilterOption = 'Todos' | ProjectCategory;
               class="filter-btn"
               [class.active]="activeFilter() === filter"
               (click)="setFilter(filter)">
-              {{ filter }}
+              {{ filter === 'Todos' ? t().projectsPage.filterAll : filter }}
             </button>
           }
         </div>
@@ -95,7 +91,7 @@ type FilterOption = 'Todos' | ProjectCategory;
 
               <div class="card-body">
                 <h3 class="project-title">{{ project.title }}</h3>
-                <p class="project-description">{{ project.description }}</p>
+                <p class="project-description">{{ langService.lang() === 'en' ? (project.descriptionEn || project.description) : project.description }}</p>
               </div>
 
               <div class="card-footer">
@@ -111,14 +107,14 @@ type FilterOption = 'Todos' | ProjectCategory;
 
         @if (filteredProjects().length === 0) {
           <div class="empty-state">
-            <p>No hay proyectos en esta categoría aún.</p>
+            <p>{{ t().projectsPage.emptyState }}</p>
           </div>
         }
       </div>
 
       <footer class="footer">
         <div class="container">
-          <p>&copy; 2026 Juan José Medicis. Todos los derechos reservados.</p>
+          <p>{{ t().contact.footer }}</p>
         </div>
       </footer>
     </div>
@@ -411,6 +407,8 @@ type FilterOption = 'Todos' | ProjectCategory;
   `],
 })
 export class ProjectsPageComponent {
+  readonly langService = inject(LangService);
+  readonly t = this.langService.t;
   readonly filters: FilterOption[] = ['Todos', 'Backend', 'Frontend', 'Fullstack'];
   activeFilter = signal<FilterOption>('Todos');
 

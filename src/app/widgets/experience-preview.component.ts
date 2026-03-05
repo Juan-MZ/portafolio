@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LangService } from '../services/lang.service';
 
 @Component({
   selector: 'app-experience-preview',
@@ -11,11 +12,11 @@ import { RouterLink } from '@angular/router';
       <div class="container">
         <div class="section-header">
           <div class="header-left">
-            <h2>Experiencia</h2>
-            <p class="subtitle">Mi trayectoria profesional y académica más reciente.</p>
+            <h2>{{ t().experiencePreview.title }}</h2>
+            <p class="subtitle">{{ t().experiencePreview.subtitle }}</p>
           </div>
           <a routerLink="/experience" class="view-all-btn">
-            Ver más
+            {{ t().experiencePreview.seeMore }}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -36,7 +37,7 @@ import { RouterLink } from '@angular/router';
                 <line x1="10" y1="14" x2="14" y2="14"/>
               </svg>
             </div>
-            <span>Experiencia Laboral</span>
+            <span>{{ t().experiencePreview.workLabel }}</span>
           </div>
 
           <div class="timeline-track">
@@ -44,15 +45,13 @@ import { RouterLink } from '@angular/router';
             <div class="timeline-card">
               <div class="card-top">
                 <div>
-                  <h3 class="card-title">Desarrollador de Software FullStack</h3>
+                  <h3 class="card-title">{{ t().experiencePreview.jobTitle }}</h3>
                   <p class="card-org">Software Mobile Solutions Ltda.</p>
                 </div>
-                <span class="period-pill">May 2023 – Actualidad</span>
+                <span class="period-pill">{{ t().experiencePreview.jobPeriod }}</span>
               </div>
               <ul class="card-bullets">
-                <li>Desarrollo de Microservicios con Spring Boot.</li>
-                <li>Diseño y conexión de Bases de datos con PostgreSQL.</li>
-                <li>Desarrollo de Aplicaciones Móviles con Flutter.</li>
+                <li *ngFor="let b of t().experiencePreview.jobBullets">{{ b }}</li>
               </ul>
             </div>
           </div>
@@ -66,7 +65,7 @@ import { RouterLink } from '@angular/router';
                 <path d="M6 12v5c3 3 9 3 12 0v-5"/>
               </svg>
             </div>
-            <span>Educación</span>
+            <span>{{ t().experiencePreview.eduLabel }}</span>
           </div>
 
           <div class="edu-cards">
@@ -75,10 +74,10 @@ import { RouterLink } from '@angular/router';
               <div class="timeline-card">
                 <div class="card-top">
                   <div>
-                    <h3 class="card-title">Maestría en Ingeniería de Software</h3>
+                    <h3 class="card-title">{{ t().experiencePreview.masterTitle }}</h3>
                     <p class="card-org">Pontificia Universidad Javeriana Cali</p>
                   </div>
-                  <span class="status-pill active-pill">En curso</span>
+                  <span class="status-pill active-pill">{{ t().experiencePreview.statusActive }}</span>
                 </div>
               </div>
             </div>
@@ -87,10 +86,10 @@ import { RouterLink } from '@angular/router';
               <div class="timeline-card">
                 <div class="card-top">
                   <div>
-                    <h3 class="card-title">Ingeniería de Sistemas</h3>
+                    <h3 class="card-title">{{ t().experiencePreview.degreeTitle }}</h3>
                     <p class="card-org">Universidad del Cauca</p>
                   </div>
-                  <span class="status-pill done-pill">Graduado</span>
+                  <span class="status-pill done-pill">{{ t().experiencePreview.statusDone }}</span>
                 </div>
               </div>
             </div>
@@ -100,7 +99,7 @@ import { RouterLink } from '@angular/router';
 
         <div class="footer-cta">
           <a routerLink="/experience" class="view-all-btn">
-            Ver experiencia completa y certificaciones
+            {{ t().experiencePreview.footerCta }}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -364,4 +363,6 @@ import { RouterLink } from '@angular/router';
     }
   `]
 })
-export class ExperiencePreviewComponent { }
+export class ExperiencePreviewComponent {
+  readonly t = inject(LangService).t;
+}

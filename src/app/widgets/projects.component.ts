@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PROJECTS } from '../data/projects.data';
+import { LangService } from '../services/lang.service';
 
 @Component({
   selector: 'app-projects',
@@ -10,11 +11,9 @@ import { PROJECTS } from '../data/projects.data';
     <section id="proyectos" class="projects">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Mi Trabajo</span>
-          <h2 class="section-title">Proyectos Destacados</h2>
-          <p class="section-description">
-            Algunos de los proyectos en los que he trabajado
-          </p>
+          <span class="section-label">{{ t().projects.label }}</span>
+          <h2 class="section-title">{{ t().projects.title }}</h2>
+          <p class="section-description">{{ t().projects.subtitle }}</p>
         </div>
 
         <div class="projects-grid">
@@ -40,7 +39,7 @@ import { PROJECTS } from '../data/projects.data';
               </div>
 
               <h3 class="project-title">{{ project.title }}</h3>
-              <p class="project-description">{{ project.description }}</p>
+              <p class="project-description">{{ langService.lang() === 'en' ? (project.descriptionEn || project.description) : project.description }}</p>
 
               <div class="project-tags">
                 @for (tag of project.tags; track tag) {
@@ -53,7 +52,7 @@ import { PROJECTS } from '../data/projects.data';
 
         <div class="view-all">
           <a routerLink="/projects" class="btn-all">
-            Ver todos los proyectos
+            {{ t().projects.viewAll }}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -263,5 +262,7 @@ import { PROJECTS } from '../data/projects.data';
   `],
 })
 export class ProjectsComponent {
+  readonly langService = inject(LangService);
+  readonly t = this.langService.t;
   readonly featuredProjects = PROJECTS.filter((p) => p.featured);
 }

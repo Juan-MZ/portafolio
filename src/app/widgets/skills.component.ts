@@ -1,5 +1,6 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LangService } from '../services/lang.service';
 
 interface Skill {
   name: string;
@@ -44,13 +45,13 @@ const ALL_SKILLS: Skill[] = [
     <section id="habilidades" class="skills-section">
       <div class="container">
         <div class="section-header">
-          <h2>Tecnologías</h2>
-          <p class="subtitle">En mi trayectoria he cultivado experiencia en una variedad de tecnologías.</p>
+          <h2>{{ t().skills.title }}</h2>
+          <p class="subtitle">{{ t().skills.subtitle }}</p>
         </div>
 
         <div class="categories-grid">
-          <div *ngFor="let group of groups" class="category-card" [class]="'card-' + group.colorClass">
-            <h3 class="category-title">{{ group.category }}</h3>
+          <div *ngFor="let group of groups()" class="category-card" [class]="'card-' + group.colorClass">
+            <h3 class="category-title">{{ group.displayName }}</h3>
             <ul class="skills-list">
               <li *ngFor="let skill of group.skills">
                 <a [href]="skill.url" target="_blank" rel="noopener noreferrer" class="skill-item">
@@ -186,11 +187,17 @@ const ALL_SKILLS: Skill[] = [
   `]
 })
 export class SkillsComponent {
-  readonly groups = [
-    { category: 'Frontend', colorClass: 'frontend', skills: ALL_SKILLS.filter(s => s.category === 'Frontend') },
-    { category: 'Backend', colorClass: 'backend', skills: ALL_SKILLS.filter(s => s.category === 'Backend') },
-    { category: 'Herramientas', colorClass: 'herramientas', skills: ALL_SKILLS.filter(s => s.category === 'Herramientas') },
-    { category: 'Aprendiendo', colorClass: 'aprendiendo', skills: ALL_SKILLS.filter(s => s.category === 'Aprendiendo') },
-  ];
+  private langService = inject(LangService);
+  readonly t = this.langService.t;
+
+  readonly groups = computed(() => {
+    const translations = this.langService.t();
+    return [
+      { displayName: 'Frontend', colorClass: 'frontend', skills: ALL_SKILLS.filter(s => s.category === 'Frontend') },
+      { displayName: 'Backend', colorClass: 'backend', skills: ALL_SKILLS.filter(s => s.category === 'Backend') },
+      { displayName: translations.skills.catTools, colorClass: 'herramientas', skills: ALL_SKILLS.filter(s => s.category === 'Herramientas') },
+      { displayName: translations.skills.catLearning, colorClass: 'aprendiendo', skills: ALL_SKILLS.filter(s => s.category === 'Aprendiendo') },
+    ];
+  });
 }
 

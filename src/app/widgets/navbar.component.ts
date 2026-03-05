@@ -1,6 +1,7 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { LangService } from '../services/lang.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,14 +19,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         </button>
 
         <ul class="nav-links" [class.active]="mobileMenuOpen()">
-          <li><a [routerLink]="['/']" fragment="sobre-mi" (click)="closeMobileMenu()">Sobre mí</a></li>
-          <li><a [routerLink]="['/']" fragment="experiencia" (click)="closeMobileMenu()">Experiencia</a></li>
-          <li><a [routerLink]="['/']" fragment="habilidades" (click)="closeMobileMenu()">Habilidades</a></li>
+          <li><a [routerLink]="['/']" fragment="sobre-mi" (click)="closeMobileMenu()">{{ t().nav.aboutMe }}</a></li>
+          <li><a [routerLink]="['/']" fragment="experiencia" (click)="closeMobileMenu()">{{ t().nav.experience }}</a></li>
+          <li><a [routerLink]="['/']" fragment="habilidades" (click)="closeMobileMenu()">{{ t().nav.skills }}</a></li>
           <li>
             <a routerLink="/projects" routerLinkActive="active-link"
-              (click)="closeMobileMenu()">Proyectos</a>
+              (click)="closeMobileMenu()">{{ t().nav.projects }}</a>
           </li>
-          <li><a [routerLink]="['/']" fragment="contacto" (click)="closeMobileMenu()">Contacto</a></li>
+          <li><a [routerLink]="['/']" fragment="contacto" (click)="closeMobileMenu()">{{ t().nav.contact }}</a></li>
         </ul>
 
         <div class="nav-socials">
@@ -39,6 +40,9 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
             </svg>
           </a>
+          <button class="lang-btn" (click)="langService.toggle()" [attr.aria-label]="lang() === 'es' ? 'Switch to English' : 'Cambiar a español'">
+            {{ lang() === 'es' ? 'EN' : 'ES' }}
+          </button>
         </div>
       </div>
     </nav>
@@ -149,6 +153,30 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       background: var(--bg-card);
     }
 
+    .lang-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      border-radius: 8px;
+      background: none;
+      border: 1px solid var(--border-color);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .lang-btn:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+      background: var(--bg-card);
+    }
+
     .mobile-toggle {
       display: none;
       flex-direction: column;
@@ -202,13 +230,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
         display: none;
       }
 
-      .nav-socials {
+      .nav-socials a {
         display: none;
       }
     }
   `]
 })
 export class NavbarComponent {
+  readonly langService = inject(LangService);
+  readonly lang = this.langService.lang;
+  readonly t = this.langService.t;
   isScrolled = signal(false);
   mobileMenuOpen = signal(false);
 

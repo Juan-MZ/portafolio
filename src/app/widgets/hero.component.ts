@@ -1,6 +1,7 @@
-import { Component, OnInit, OnDestroy, signal } from '@angular/core';
+import { Component, OnDestroy, computed, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { LangService } from '../services/lang.service';
 
 @Component({
   selector: 'app-hero',
@@ -12,12 +13,10 @@ import { CommonModule } from '@angular/common';
 
         <div class="intro">
           <div class="intro-text">
-            <p class="greeting">Hola,<span class="name"> soy Juan José</span></p>
+            <p class="greeting">{{ t().hero.greeting }}<span class="name">{{ t().hero.name }}</span></p>
             <p class="role"><span class="typed-text">{{ displayedRole() }}</span><span class="cursor" [class.blink]="cursorBlink()">|</span></p>
-            <p class="tagline">Apasionado por crear experiencias digitales excepcionales</p>
-            <p class="tagline">
-              Entiendo la tecnología como una herramienta para hacer la vida más sencilla y divertida, por eso cuido la calidad de mi código tanto como la colaboración y la comunicación dentro del equipo.
-            </p>
+            <p class="tagline">{{ t().hero.tagline1 }}</p>
+            <p class="tagline">{{ t().hero.tagline2 }}</p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/juanjosemedicis/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -48,7 +47,7 @@ import { CommonModule } from '@angular/common';
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              Descargar CV
+              {{ t().hero.downloadCV }}
             </a>
           </div>
         </div>
@@ -56,7 +55,7 @@ import { CommonModule } from '@angular/common';
       </div>
 
       <div class="scroll-indicator">
-        <span class="scroll-label">Experiencia</span>
+        <span class="scroll-label">{{ t().hero.scrollLabel }}</span>
         <div class="scroll-arrow">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -277,26 +276,36 @@ import { CommonModule } from '@angular/common';
     }
   `],
 })
-export class HeroComponent implements OnInit, OnDestroy {
-  readonly fullRole = 'Ingeniero de Sistemas';
+export class HeroComponent implements OnDestroy {
+  private langService = inject(LangService);
+  readonly t = this.langService.t;
+
   displayedRole = signal('');
   cursorBlink = signal(false);
-
   private typeInterval: ReturnType<typeof setInterval> | null = null;
 
-  ngOnInit() {
-    let index = 0;
-    const typeSpeed = 80;
+  private readonly fullRole = computed(() => this.langService.t().hero.role);
 
+  constructor() {
+    effect(() => {
+      this.startTyping(this.fullRole());
+    }, { allowSignalWrites: true });
+  }
+
+  private startTyping(role: string) {
+    if (this.typeInterval) clearInterval(this.typeInterval);
+    this.displayedRole.set('');
+    this.cursorBlink.set(false);
+    let index = 0;
     this.typeInterval = setInterval(() => {
-      if (index < this.fullRole.length) {
-        this.displayedRole.set(this.fullRole.slice(0, index + 1));
+      if (index < role.length) {
+        this.displayedRole.set(role.slice(0, index + 1));
         index++;
       } else {
         clearInterval(this.typeInterval!);
         this.cursorBlink.set(true);
       }
-    }, typeSpeed);
+    }, 80);
   }
 
   ngOnDestroy() {

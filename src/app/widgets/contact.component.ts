@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { LangService } from '../services/lang.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,11 +12,9 @@ import { HttpClient } from '@angular/common/http';
     <section id="contacto" class="contact">
       <div class="container">
         <div class="section-header">
-          <span class="section-label">Hablemos</span>
-          <h2 class="section-title">Contacto</h2>
-          <p class="section-description">
-            ¿Tienes un proyecto en mente? Me encantaría escucharte
-          </p>
+          <span class="section-label">{{ t().contact.label }}</span>
+          <h2 class="section-title">{{ t().contact.title }}</h2>
+          <p class="section-description">{{ t().contact.description }}</p>
         </div>
 
         <div class="contact-content">
@@ -36,7 +35,7 @@ import { HttpClient } from '@angular/common/http';
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.36 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 5.98 5.98l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
               </div>
-              <h3>Teléfono</h3>
+              <h3>{{ t().contact.phone }}</h3>
               <p>+57 321 331 4641</p>
             </a>
             <a href="https://maps.google.com/?q=Popay%C3%A1n,+Cauca,+Colombia" target="_blank" rel="noopener noreferrer" class="info-card">
@@ -46,12 +45,12 @@ import { HttpClient } from '@angular/common/http';
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
               </div>
-              <h3>Ubicación</h3>
+              <h3>{{ t().contact.location }}</h3>
               <p>Popayán, Colombia</p>
             </a>
 
             <div class="social-section">
-              <h3>Sígueme en redes</h3>
+              <h3>{{ t().contact.followMe }}</h3>
               <div class="social-links">
                 <a href="https://github.com/Juan-MZ" target="_blank" rel="noopener noreferrer" class="social-link">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -71,17 +70,17 @@ import { HttpClient } from '@angular/common/http';
 
           <form class="contact-form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-              <label for="name">Nombre</label>
+              <label for="name">{{ t().contact.name }}</label>
               <input
                 type="text"
                 id="name"
                 name="name"
                 [(ngModel)]="formData.name"
-                placeholder="Tu nombre"
+                [placeholder]="t().contact.namePlaceholder"
                 required>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
+              <label for="email">{{ t().contact.email }}</label>
               <input
                 type="email"
                 id="email"
@@ -91,28 +90,28 @@ import { HttpClient } from '@angular/common/http';
                 required>
             </div>
             <div class="form-group">
-              <label for="subject">Asunto</label>
+              <label for="subject">{{ t().contact.subject }}</label>
               <input
                 type="text"
                 id="subject"
                 name="subject"
                 [(ngModel)]="formData.subject"
-                placeholder="Motivo del contacto"
+                [placeholder]="t().contact.subjectPlaceholder"
                 required>
             </div>
             <div class="form-group">
-              <label for="message">Mensaje</label>
+              <label for="message">{{ t().contact.message }}</label>
               <textarea
                 id="message"
                 name="message"
                 [(ngModel)]="formData.message"
                 rows="5"
-                placeholder="Cuéntame sobre tu proyecto..."
+                [placeholder]="t().contact.messagePlaceholder"
                 required></textarea>
             </div>
             <button type="submit" class="submit-btn" [disabled]="sending">
-              <span *ngIf="!sending">Enviar Mensaje</span>
-              <span *ngIf="sending">Enviando...</span>
+              <span *ngIf="!sending">{{ t().contact.sendButton }}</span>
+              <span *ngIf="sending">{{ t().contact.sending }}</span>
               <svg *ngIf="!sending" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="10" x2="15" y2="10"></line>
                 <polyline points="10 5 15 10 10 15"></polyline>
@@ -120,10 +119,10 @@ import { HttpClient } from '@angular/common/http';
             </button>
 
             <div *ngIf="success" class="form-feedback success">
-              ✅ ¡Mensaje enviado! Te responderé a la brevedad.
+              {{ t().contact.successMsg }}
             </div>
             <div *ngIf="error" class="form-feedback error">
-              ❌ Ocurrió un error al enviar. Intenta de nuevo.
+              {{ t().contact.errorMsg }}
             </div>
           </form>
         </div>
@@ -132,7 +131,7 @@ import { HttpClient } from '@angular/common/http';
 
     <footer class="footer">
       <div class="container">
-        <p>&copy; 2026 Juan José Medicis. Todos los derechos reservados.</p>
+        <p>{{ t().contact.footer }}</p>
       </div>
     </footer>
   `,
@@ -408,6 +407,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ContactComponent {
   private http = inject(HttpClient);
+  private langService = inject(LangService);
+  readonly t = this.langService.t;
 
   // Reemplaza este valor con tu access key de https://web3forms.com
   private readonly ACCESS_KEY = '6281111e-aa31-442a-be59-b870a0186398';

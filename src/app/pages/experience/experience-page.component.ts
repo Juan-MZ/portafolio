@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { LangService } from '../../services/lang.service';
 
 interface ExperienceItem {
   type: 'work' | 'education' | 'certification';
@@ -10,6 +11,13 @@ interface ExperienceItem {
   description?: string[];
   badge?: string;
   url?: string;
+  en?: {
+    title?: string;
+    organization?: string;
+    period?: string;
+    description?: string[];
+    badge?: string;
+  };
 }
 
 const EXPERIENCE_ITEMS: ExperienceItem[] = [
@@ -25,6 +33,16 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
       'Desarrollo de Microservicios con Spring Boot.',
       'Desarrollo de Aplicaciones Móviles con Flutter.',
     ],
+    en: {
+      title: 'FullStack Software Developer',
+      period: 'May 2023 – Present',
+      description: [
+        'Code maintenance and application of software development best practices.',
+        'Database design and connection with PostgreSQL.',
+        'Microservices development with Spring Boot.',
+        'Mobile Application development with Flutter.',
+      ],
+    },
   },
 ];
 
@@ -35,6 +53,11 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     organization: 'Pontificia Universidad Javeriana Cali',
     period: 'En proceso · Esperado Jul 2027',
     badge: 'En curso',
+    en: {
+      title: "Master's in Software Engineering",
+      period: 'In progress · Expected Jul 2027',
+      badge: 'In progress',
+    },
   },
   {
     type: 'education',
@@ -42,6 +65,10 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     organization: 'Universidad de La Sabana',
     period: 'Jun 2025',
     badge: 'Completado',
+    en: {
+      title: 'Diploma in Software Architecture',
+      badge: 'Completed',
+    },
   },
   {
     type: 'education',
@@ -49,6 +76,10 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     organization: 'Cambridge Language Centres, Popayán',
     period: 'Feb 2025',
     badge: 'Completado',
+    en: {
+      title: 'Occupational Aptitude — English C1',
+      badge: 'Completed',
+    },
   },
   {
     type: 'education',
@@ -56,6 +87,11 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     organization: 'Universidad del Cauca',
     period: '2018 – Ene 2025',
     badge: 'Graduado',
+    en: {
+      title: 'Systems Engineering',
+      period: '2018 – Jan 2025',
+      badge: 'Graduate',
+    },
   },
 ];
 
@@ -83,12 +119,20 @@ const CERT_ITEMS: ExperienceItem[] = [
     title: 'Programación y Desarrollo de Software',
     organization: 'Certificación académica',
     period: 'Jun 2023',
+    en: {
+      title: 'Programming and Software Development',
+      organization: 'Academic Certification',
+    },
   },
   {
     type: 'certification',
     title: 'Desarrollo Web con PHP',
     organization: 'Certificación académica',
     period: '2023',
+    en: {
+      title: 'Web Development with PHP',
+      organization: 'Academic Certification',
+    },
   },
 ];
 
@@ -106,13 +150,11 @@ const CERT_ITEMS: ExperienceItem[] = [
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19 12H5M12 5l-7 7 7 7"/>
             </svg>
-            Volver al inicio
+            {{ t().experiencePage.backLink }}
           </a>
           <div class="header-content">
-            <h1>Experiencia & Educación</h1>
-            <p class="header-subtitle">
-              Mi trayectoria profesional y académica a lo largo del tiempo.
-            </p>
+            <h1>{{ t().experiencePage.title }}</h1>
+            <p class="header-subtitle">{{ t().experiencePage.subtitle }}</p>
           </div>
         </div>
       </header>
@@ -131,7 +173,7 @@ const CERT_ITEMS: ExperienceItem[] = [
                 <line x1="10" y1="14" x2="14" y2="14"/>
               </svg>
             </div>
-            <h2>Experiencia Laboral</h2>
+            <h2>{{ t().experiencePage.workSection }}</h2>
           </div>
 
           <div class="timeline">
@@ -140,13 +182,13 @@ const CERT_ITEMS: ExperienceItem[] = [
               <div class="timeline-card">
                 <div class="card-header">
                   <div>
-                    <h3 class="item-title">{{ item.title }}</h3>
-                    <p class="item-org">{{ item.organization }}</p>
+                    <h3 class="item-title">{{ getTitle(item) }}</h3>
+                    <p class="item-org">{{ getOrg(item) }}</p>
                   </div>
-                  <span class="period-badge">{{ item.period }}</span>
+                  <span class="period-badge">{{ getPeriod(item) }}</span>
                 </div>
                 <ul *ngIf="item.description" class="item-desc">
-                  <li *ngFor="let desc of item.description">{{ desc }}</li>
+                  <li *ngFor="let desc of getDescription(item)">{{ desc }}</li>
                 </ul>
               </div>
             </div>
@@ -163,7 +205,7 @@ const CERT_ITEMS: ExperienceItem[] = [
                 <path d="M6 12v5c3 3 9 3 12 0v-5"/>
               </svg>
             </div>
-            <h2>Educación</h2>
+            <h2>{{ t().experiencePage.eduSection }}</h2>
           </div>
 
           <div class="timeline">
@@ -172,13 +214,13 @@ const CERT_ITEMS: ExperienceItem[] = [
               <div class="timeline-card">
                 <div class="card-header">
                   <div>
-                    <h3 class="item-title">{{ item.title }}</h3>
-                    <p class="item-org">{{ item.organization }}</p>
+                    <h3 class="item-title">{{ getTitle(item) }}</h3>
+                    <p class="item-org">{{ getOrg(item) }}</p>
                   </div>
                   <div class="badges-group">
-                    <span class="period-badge">{{ item.period }}</span>
-                    <span *ngIf="item.badge" [class]="'status-badge ' + getBadgeClass(item.badge)">
-                      {{ item.badge }}
+                    <span class="period-badge">{{ getPeriod(item) }}</span>
+                    <span *ngIf="item.badge" [class]="'status-badge ' + getBadgeClass(item)">
+                      {{ getBadge(item) }}
                     </span>
                   </div>
                 </div>
@@ -197,7 +239,7 @@ const CERT_ITEMS: ExperienceItem[] = [
                 <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
               </svg>
             </div>
-            <h2>Certificaciones</h2>
+            <h2>{{ t().experiencePage.certSection }}</h2>
           </div>
 
           <div class="certs-grid">
@@ -210,8 +252,8 @@ const CERT_ITEMS: ExperienceItem[] = [
                 </svg>
               </div>
               <div class="cert-info">
-                <h3 class="cert-title">{{ cert.title }}</h3>
-                <p class="cert-org">{{ cert.organization }}</p>
+                <h3 class="cert-title">{{ getTitle(cert) }}</h3>
+                <p class="cert-org">{{ getOrg(cert) }}</p>
               </div>
               <span class="cert-period">{{ cert.period }}</span>
             </div>
@@ -491,13 +533,40 @@ const CERT_ITEMS: ExperienceItem[] = [
   `]
 })
 export class ExperiencePageComponent {
+  private langService = inject(LangService);
+  readonly t = this.langService.t;
   readonly experience = EXPERIENCE_ITEMS;
   readonly education = EDUCATION_ITEMS;
   readonly certifications = CERT_ITEMS;
 
-  getBadgeClass(badge: string): string {
-    if (badge === 'En curso') return 'badge-active';
-    if (badge === 'Graduado') return 'badge-graduate';
+  private get isEn(): boolean {
+    return this.langService.lang() === 'en';
+  }
+
+  getTitle(item: ExperienceItem): string {
+    return (this.isEn && item.en?.title) ? item.en.title : item.title;
+  }
+
+  getOrg(item: ExperienceItem): string {
+    return (this.isEn && item.en?.organization) ? item.en.organization : item.organization;
+  }
+
+  getPeriod(item: ExperienceItem): string {
+    return (this.isEn && item.en?.period) ? item.en.period : item.period;
+  }
+
+  getBadge(item: ExperienceItem): string {
+    return (this.isEn && item.en?.badge) ? item.en.badge : (item.badge ?? '');
+  }
+
+  getDescription(item: ExperienceItem): string[] {
+    return (this.isEn && item.en?.description) ? item.en.description : (item.description ?? []);
+  }
+
+  getBadgeClass(item: ExperienceItem): string {
+    const badge = this.getBadge(item);
+    if (['En curso', 'In progress'].includes(badge)) return 'badge-active';
+    if (['Graduado', 'Graduate'].includes(badge)) return 'badge-graduate';
     return 'badge-done';
   }
 }
