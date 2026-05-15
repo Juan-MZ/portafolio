@@ -14,6 +14,18 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: 'Atlantes Software',
+    description:
+      'Sitio web corporativo de Atlantes Software S.A.S — estudio boutique especializado en SaaS, IA y automatización. Diseño moderno con Angular y Tailwind CSS, con secciones de servicios, portafolio y contacto.',
+    descriptionEn:
+      'Corporate website for Atlantes Software S.A.S — a boutique studio specializing in SaaS, AI and automation. Modern design built with Angular and Tailwind CSS, featuring services, portfolio and contact sections.',
+    image: 'devicon-angular-plain',
+    tags: ['Angular', 'Tailwind CSS', 'Vercel'],
+    category: 'Frontend',
+    featured: true,
+    link: 'https://www.atlantes.dev',
+  },
+  {
     title: 'Looping',
     description:
       'Plataforma SaaS para automatizar publicaciones en redes sociales. App de escritorio multiplataforma con Electron, portal en Angular con suscripciones vía Mercado Pago y licenciamiento automático por hardware ID.',

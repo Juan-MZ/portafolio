@@ -27,6 +27,7 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
     title: 'Co-Founder | CEO & CTO | Solutions Architect',
     organization: 'ATLANTES SOFTWARE S.A.S',
     period: 'Mar. 2026 – Actualidad',
+    url: 'https://www.atlantes.dev',
     description: [
       'Dirección ejecutiva y técnica de la empresa.',
       'Diseño de arquitectura de soluciones de software para clientes.',
@@ -49,6 +50,7 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
     title: 'Desarrollador de Software FullStack',
     organization: 'Software Mobile Solutions Ltda.',
     period: 'Mayo 2023 – Actualidad',
+    url: 'https://somos.biz',
     description: [
       'Mantenimiento de código y aplicación de buenas prácticas de desarrollo.',
       'Diseño y conexión de Bases de datos con PostgreSQL.',
@@ -221,6 +223,14 @@ const CERT_ITEMS: ExperienceItem[] = [
                 <ul *ngIf="item.description" class="item-desc">
                   <li *ngFor="let desc of getDescription(item)">{{ desc }}</li>
                 </ul>
+                <a *ngIf="item.url" [href]="item.url" target="_blank" rel="noopener noreferrer" class="org-link">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                  Visitar sitio
+                </a>
               </div>
             </div>
           </div>
@@ -490,6 +500,24 @@ const CERT_ITEMS: ExperienceItem[] = [
       font-size: 0.9rem;
       color: var(--text-secondary);
       line-height: 1.5;
+    }
+
+    .org-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, gap 0.2s ease;
+    }
+
+    .org-link:hover {
+      opacity: 1;
+      gap: 0.55rem;
     }
 
     /* Certifications grid */
