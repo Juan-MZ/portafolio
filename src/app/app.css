@@ -3,3 +3,137 @@
 :host {
   display: block;
 }
+
+.app-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Fondo dinámico ──────────────────────────────── */
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Orbs flotantes */
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.bg-orb-1 {
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.2) 0%, transparent 70%);
+  top: -200px;
+  left: -150px;
+  filter: blur(72px);
+  animation: floatA 18s ease-in-out infinite;
+}
+
+.bg-orb-2 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.18) 0%, transparent 70%);
+  top: 35%;
+  right: -180px;
+  filter: blur(80px);
+  animation: floatB 22s ease-in-out infinite;
+}
+
+.bg-orb-3 {
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.14) 0%, transparent 70%);
+  bottom: 8%;
+  left: 22%;
+  filter: blur(90px);
+  animation: floatC 26s ease-in-out infinite;
+}
+
+.bg-orb-4 {
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.13) 0%, transparent 70%);
+  top: 55%;
+  left: -80px;
+  filter: blur(70px);
+  animation: floatA 20s ease-in-out infinite reverse;
+}
+
+@keyframes floatA {
+  0%,  100% { transform: translate(0px,   0px)  scale(1);    }
+  25%        { transform: translate(45px, -55px) scale(1.07); }
+  50%        { transform: translate(20px, -20px) scale(0.95); }
+  75%        { transform: translate(-35px, 30px) scale(1.04); }
+}
+
+@keyframes floatB {
+  0%,  100% { transform: translate(0px,   0px)  scale(1);    }
+  33%        { transform: translate(-55px, 45px) scale(1.09); }
+  66%        { transform: translate(35px, -35px) scale(0.92); }
+}
+
+@keyframes floatC {
+  0%,  100% { transform: translate(0px,   0px)  scale(1);    }
+  20%        { transform: translate(35px,  45px) scale(1.06); }
+  40%        { transform: translate(-25px, 65px) scale(0.97); }
+  60%        { transform: translate(-45px, 20px) scale(1.05); }
+  80%        { transform: translate(25px, -35px) scale(0.96); }
+}
+
+/* Patrón de puntos */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(96, 165, 250, 0.14) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 10%, transparent 78%);
+}
+
+/* ── Resplandor neon del mouse ───────────────────── */
+.mouse-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    radial-gradient(350px circle at var(--gx, -9999px) var(--gy, -9999px),
+      rgba(96, 165, 250, 0.13), transparent 75%),
+    radial-gradient(800px circle at var(--gx, -9999px) var(--gy, -9999px),
+      rgba(129, 140, 248, 0.06), transparent 65%);
+}
+
+/* ── Tema claro ──────────────────────────────────── */
+:host-context([data-theme="light"]) .bg-orb-1 {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.11) 0%, transparent 70%);
+}
+
+:host-context([data-theme="light"]) .bg-orb-2 {
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.09) 0%, transparent 70%);
+}
+
+:host-context([data-theme="light"]) .bg-orb-3 {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 70%);
+}
+
+:host-context([data-theme="light"]) .bg-orb-4 {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.07) 0%, transparent 70%);
+}
+
+:host-context([data-theme="light"]) .bg-grid {
+  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+}
+
+:host-context([data-theme="light"]) .mouse-glow {
+  background:
+    radial-gradient(350px circle at var(--gx, -9999px) var(--gy, -9999px),
+      rgba(37, 99, 235, 0.08), transparent 75%),
+    radial-gradient(800px circle at var(--gx, -9999px) var(--gy, -9999px),
+      rgba(99, 102, 241, 0.04), transparent 65%);
+}
