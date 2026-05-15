@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LangService } from '../../services/lang.service';
 
@@ -22,6 +22,28 @@ interface ExperienceItem {
 
 const EXPERIENCE_ITEMS: ExperienceItem[] = [
   // Experiencia laboral
+  {
+    type: 'work',
+    title: 'Co-Founder | CEO & CTO | Solutions Architect',
+    organization: 'ATLANTES SOFTWARE S.A.S',
+    period: 'Mar. 2026 – Actualidad',
+    description: [
+      'Dirección ejecutiva y técnica de la empresa.',
+      'Diseño de arquitectura de soluciones de software para clientes.',
+      'Desarrollo de plataformas SaaS con Angular y Tailwind CSS.',
+      'Desarrollo de apps de escritorio multiplataforma con Electron.',
+    ],
+    en: {
+      title: 'Co-Founder | CEO & CTO | Solutions Architect',
+      period: 'Mar. 2026 – Present',
+      description: [
+        'Executive and technical management of the company.',
+        'Software solution architecture design for clients.',
+        'SaaS platform development with Angular and Tailwind CSS.',
+        'Cross-platform desktop application development with Electron.',
+      ],
+    },
+  },
   {
     type: 'work',
     title: 'Desarrollador de Software FullStack',
@@ -51,11 +73,11 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     type: 'education',
     title: 'Maestría en Ingeniería de Software',
     organization: 'Pontificia Universidad Javeriana Cali',
-    period: 'En proceso · Esperado Jul 2027',
+    period: 'Ene. 2026 – Jul. 2027 · En curso',
     badge: 'En curso',
     en: {
       title: "Master's in Software Engineering",
-      period: 'In progress · Expected Jul 2027',
+      period: 'Jan. 2026 – Jul. 2027 · In progress',
       badge: 'In progress',
     },
   },
@@ -63,10 +85,11 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     type: 'education',
     title: 'Diplomado en Arquitectura de Software',
     organization: 'Universidad de La Sabana',
-    period: 'Jun 2025',
+    period: 'Abr. 2025 – Jun. 2025',
     badge: 'Completado',
     en: {
       title: 'Diploma in Software Architecture',
+      period: 'Apr. 2025 – Jun. 2025',
       badge: 'Completed',
     },
   },
@@ -74,7 +97,7 @@ const EDUCATION_ITEMS: ExperienceItem[] = [
     type: 'education',
     title: 'Aptitud Ocupacional — Inglés C1',
     organization: 'Cambridge Language Centres, Popayán',
-    period: 'Feb 2025',
+    period: 'Jul. 2023 – Feb. 2025',
     badge: 'Completado',
     en: {
       title: 'Occupational Aptitude — English C1',
@@ -99,39 +122,47 @@ const CERT_ITEMS: ExperienceItem[] = [
   {
     type: 'certification',
     title: 'Scrum Fundamentals Certified (SFC)',
-    organization: 'SCRUMstudy',
-    period: 'May 2024',
+    organization: 'Vabro.ai and VMEdu.com',
+    period: 'May. 2024',
   },
   {
     type: 'certification',
     title: 'Introduction to Transformer-Based NLP',
     organization: 'NVIDIA Deep Learning Institute',
-    period: '2024',
+    period: 'May. 2024',
   },
   {
     type: 'certification',
     title: 'Getting Started with Deep Learning',
     organization: 'NVIDIA Deep Learning Institute',
-    period: 'Feb 2023',
+    period: 'Feb. 2023',
   },
   {
     type: 'certification',
     title: 'Programación y Desarrollo de Software',
-    organization: 'Certificación académica',
-    period: 'Jun 2023',
+    organization: 'Platzi',
+    period: 'Jun. 2023',
     en: {
       title: 'Programming and Software Development',
-      organization: 'Academic Certification',
+    },
+  },
+  {
+    type: 'certification',
+    title: 'Curso de Pensamiento Lógico: Manejo de Datos, Estructuras y Funciones',
+    organization: 'Platzi',
+    period: 'Ago. 2022',
+    en: {
+      title: 'Logical Thinking Course: Data Handling, Structures and Functions',
     },
   },
   {
     type: 'certification',
     title: 'Desarrollo Web con PHP',
-    organization: 'Certificación académica',
-    period: '2023',
+    organization: 'Servicio Nacional de Aprendizaje (SENA)',
+    period: 'Ago. 2021',
     en: {
       title: 'Web Development with PHP',
-      organization: 'Academic Certification',
+      organization: 'Servicio Nacional de Aprendizaje (SENA)',
     },
   },
 ];

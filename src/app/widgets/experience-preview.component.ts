@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LangService } from '../services/lang.service';
 
@@ -46,7 +46,7 @@ import { LangService } from '../services/lang.service';
               <div class="card-top">
                 <div>
                   <h3 class="card-title">{{ t().experiencePreview.jobTitle }}</h3>
-                  <p class="card-org">Software Mobile Solutions Ltda.</p>
+                  <p class="card-org">ATLANTES SOFTWARE S.A.S</p>
                 </div>
                 <span class="period-pill">{{ t().experiencePreview.jobPeriod }}</span>
               </div>

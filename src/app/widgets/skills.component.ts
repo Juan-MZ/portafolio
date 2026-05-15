@@ -1,5 +1,5 @@
-﻿import { Component, computed, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+﻿import { CommonModule } from '@angular/common';
+import { Component, computed, inject } from '@angular/core';
 import { LangService } from '../services/lang.service';
 
 interface Skill {
@@ -18,6 +18,7 @@ const ALL_SKILLS: Skill[] = [
   { name: 'CSS', icon: 'devicon-css3-plain', category: 'Frontend', url: 'https://developer.mozilla.org/docs/Web/CSS' },
   { name: 'JavaScript', icon: 'devicon-javascript-plain', category: 'Frontend', url: 'https://developer.mozilla.org/docs/Web/JavaScript' },
   { name: 'TypeScript', icon: 'devicon-typescript-plain', category: 'Frontend', url: 'https://www.typescriptlang.org' },
+  { name: 'Tailwind CSS', icon: 'devicon-tailwindcss-plain', category: 'Frontend', url: 'https://tailwindcss.com' },
   // Backend
   { name: 'Java', icon: 'devicon-java-plain', category: 'Backend', url: 'https://www.java.com' },
   { name: 'Spring Boot', icon: 'devicon-spring-plain', category: 'Backend', url: 'https://spring.io/projects/spring-boot' },
@@ -35,6 +36,7 @@ const ALL_SKILLS: Skill[] = [
   { name: 'AWS', icon: 'devicon-amazonwebservices-plain-wordmark', category: 'Aprendiendo', url: 'https://aws.amazon.com' },
   { name: 'Kubernetes', icon: 'devicon-kubernetes-plain', category: 'Aprendiendo', url: 'https://kubernetes.io' },
   { name: 'GraphQL', icon: 'devicon-graphql-plain', category: 'Aprendiendo', url: 'https://graphql.org' },
+  { name: '.NET', icon: 'devicon-dotnetcore-plain', category: 'Aprendiendo', url: 'https://dotnet.microsoft.com' },
 ];
 
 @Component({

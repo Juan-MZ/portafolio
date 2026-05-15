@@ -14,6 +14,52 @@ export interface Project {
 
 export const PROJECTS: Project[] = [
   {
+    title: 'Looping',
+    description:
+      'Plataforma SaaS para automatizar publicaciones en redes sociales. App de escritorio multiplataforma con Electron, portal en Angular con suscripciones vía Mercado Pago y licenciamiento automático por hardware ID.',
+    descriptionEn:
+      'SaaS platform to automate social media publishing. Cross-platform desktop app with Electron, Angular portal, subscriptions via Mercado Pago, and automatic hardware ID-based licensing.',
+    image: 'devicon-angular-plain',
+    tags: ['Angular', 'Electron', 'Mercado Pago', 'SaaS'],
+    category: 'Fullstack',
+    featured: true,
+    link: 'https://looping.atlantes.dev/',
+  },
+  {
+    title: 'Construmedicis',
+    description:
+      'Sitio web corporativo para una constructora con catálogo de proyectos, servicios y formulario de contacto.',
+    descriptionEn:
+      'Corporate website for a construction company with project catalog, services and contact form.',
+    image: 'devicon-angular-plain',
+    tags: ['Angular', 'Vercel', 'Tailwind CSS'],
+    category: 'Frontend',
+    featured: true,
+    link: 'https://construmedicis.vercel.app/',
+  },
+  {
+    title: 'CDA del Putumayo',
+    description:
+      'Sitio web institucional para un Centro de Diagnóstico Automotor con información de servicios, normativa y contacto.',
+    descriptionEn:
+      'Institutional website for an Automotive Diagnostic Center with service information, regulations and contact.',
+    image: 'devicon-angular-plain',
+    tags: ['Angular', 'Vercel', 'Tailwind CSS'],
+    category: 'Frontend',
+    link: 'https://www.cdadelputumayo.com/site/',
+  },
+  {
+    title: 'Portal de Turismo Putumayo',
+    description:
+      'Portal web de turismo para descubrir destinos, paquetes y experiencias en el Putumayo amazónico. Diseñado para agencias de viajes locales.',
+    descriptionEn:
+      'Tourism web portal to discover destinations, packages and experiences in the Amazonian Putumayo. Designed for local travel agencies.',
+    image: 'devicon-angular-plain',
+    tags: ['Angular', 'Vercel', 'Tailwind CSS'],
+    category: 'Frontend',
+    link: 'https://turismo-putumayo.vercel.app/',
+  },
+  {
     title: 'archsoftmeasure',
     description:
       'Modelo de medición de las habilidades técnicas y blandas de un arquitecto de software. Incluye evaluaciones y métricas para determinar el nivel de madurez arquitectónica.',
