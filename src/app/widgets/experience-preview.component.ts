@@ -46,12 +46,28 @@ import { LangService } from '../services/lang.service';
               <div class="card-top">
                 <div>
                   <h3 class="card-title">{{ t().experiencePreview.jobTitle }}</h3>
-                  <p class="card-org">ATLANTES SOFTWARE S.A.S</p>
+                  <p class="card-org">{{ t().experiencePreview.jobOrg }}</p>
                 </div>
                 <span class="period-pill">{{ t().experiencePreview.jobPeriod }}</span>
               </div>
               <ul class="card-bullets">
                 <li *ngFor="let b of t().experiencePreview.jobBullets">{{ b }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="timeline-track">
+            <div class="timeline-dot work-dot"></div>
+            <div class="timeline-card">
+              <div class="card-top">
+                <div>
+                  <h3 class="card-title">{{ t().experiencePreview.job2Title }}</h3>
+                  <p class="card-org">{{ t().experiencePreview.job2Org }}</p>
+                </div>
+                <span class="period-pill">{{ t().experiencePreview.job2Period }}</span>
+              </div>
+              <ul class="card-bullets">
+                <li *ngFor="let b of t().experiencePreview.job2Bullets">{{ b }}</li>
               </ul>
             </div>
           </div>
